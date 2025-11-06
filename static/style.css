@@ -1,0 +1,467 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+/* ヘッダー */
+header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 1.1em;
+    opacity: 0.9;
+}
+
+/* メインコンテンツ */
+main {
+    padding: 30px;
+}
+
+/* 入力セクション */
+.input-section {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    font-weight: 600;
+    font-size: 1.1em;
+    min-width: 120px;
+}
+
+.input-group input {
+    flex: 1;
+    padding: 12px 20px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.example-tickers {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.example-tickers p {
+    font-weight: 600;
+    color: #666;
+}
+
+.ticker-tag {
+    padding: 8px 16px;
+    background: white;
+    border: 2px solid #667eea;
+    border-radius: 20px;
+    color: #667eea;
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.ticker-tag:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* ローディング */
+.loading {
+    text-align: center;
+    padding: 40px;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* エラーメッセージ */
+.error-message {
+    background: #fee;
+    color: #c33;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border-left: 4px solid #c33;
+}
+
+/* 株価情報 */
+.stock-info {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.stock-info h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #667eea;
+}
+
+.stock-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.price-container {
+    flex: 1;
+}
+
+.current-price {
+    font-size: 3em;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.price-change {
+    font-size: 1.3em;
+    font-weight: 600;
+}
+
+.price-change.positive {
+    color: #10b981;
+}
+
+.price-change.negative {
+    color: #ef4444;
+}
+
+.last-updated {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.stock-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    background: white;
+    border-radius: 8px;
+}
+
+.detail-item .label {
+    font-weight: 600;
+    color: #666;
+}
+
+/* ニュースセクション */
+.news-section {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.news-section h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #667eea;
+}
+
+.news-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.news-item {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid #667eea;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.news-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.news-item h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.news-item a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.news-item a:hover {
+    color: #667eea;
+}
+
+.news-meta {
+    display: flex;
+    gap: 15px;
+    font-size: 0.85em;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.news-summary {
+    color: #555;
+    line-height: 1.6;
+}
+
+/* 予測セクション */
+.prediction-section {
+    background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.prediction-section h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #667eea;
+}
+
+.prediction-container {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.prediction-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.prediction-price-container {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 30px;
+    border-radius: 15px;
+    color: white;
+}
+
+.prediction-label {
+    font-size: 1.1em;
+    opacity: 0.9;
+    margin-bottom: 10px;
+}
+
+.prediction-price {
+    font-size: 3em;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.prediction-change {
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+.prediction-change.positive {
+    color: #10b981;
+}
+
+.prediction-change.negative {
+    color: #ef4444;
+}
+
+.prediction-date {
+    margin-top: 15px;
+    font-size: 0.95em;
+    opacity: 0.9;
+}
+
+.confidence-interval, .indicators, .analysis {
+    margin-bottom: 25px;
+}
+
+.confidence-interval h3, .indicators h3, .analysis h3 {
+    font-size: 1.3em;
+    margin-bottom: 15px;
+    color: #667eea;
+}
+
+.interval-range {
+    display: flex;
+    gap: 20px;
+}
+
+.interval-item {
+    flex: 1;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.indicator-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.indicator-item {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.indicator-item .label {
+    font-weight: 600;
+    color: #666;
+}
+
+.analysis p {
+    line-height: 1.8;
+    color: #555;
+    font-size: 1.05em;
+}
+
+.disclaimer {
+    background: #fff3cd;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #ffc107;
+}
+
+.disclaimer p {
+    color: #856404;
+    font-size: 0.9em;
+    line-height: 1.6;
+}
+
+/* フッター */
+footer {
+    background: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* ユーティリティ */
+.hidden {
+    display: none !important;
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8em;
+    }
+
+    .input-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .input-group label {
+        min-width: auto;
+    }
+
+    .current-price {
+        font-size: 2em;
+    }
+
+    .prediction-price {
+        font-size: 2em;
+    }
+
+    .stock-details {
+        grid-template-columns: 1fr;
+    }
+
+    .interval-range {
+        flex-direction: column;
+    }
+}

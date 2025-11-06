@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本株価分析・予測アプリ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📈 日本株価分析・予測アプリ</h1>
+            <p class="subtitle">リアルタイム株価情報・ニュース・AI予測</p>
+        </header>
+
+        <main>
+            <!-- 銘柄入力セクション -->
+            <section class="input-section">
+                <div class="input-group">
+                    <label for="ticker-input">銘柄コード:</label>
+                    <input
+                        type="text"
+                        id="ticker-input"
+                        placeholder="例: 7203 (トヨタ自動車)"
+                        autocomplete="off"
+                    >
+                    <button id="search-btn" class="btn btn-primary">検索</button>
+                </div>
+                <div class="example-tickers">
+                    <p>人気銘柄:</p>
+                    <button class="ticker-tag" data-ticker="7203">7203 トヨタ</button>
+                    <button class="ticker-tag" data-ticker="9984">9984 ソフトバンク</button>
+                    <button class="ticker-tag" data-ticker="6758">6758 ソニー</button>
+                    <button class="ticker-tag" data-ticker="8306">8306 三菱UFJ</button>
+                    <button class="ticker-tag" data-ticker="9433">9433 KDDI</button>
+                </div>
+            </section>
+
+            <!-- ローディング表示 -->
+            <div id="loading" class="loading hidden">
+                <div class="spinner"></div>
+                <p>データを取得中...</p>
+            </div>
+
+            <!-- エラー表示 -->
+            <div id="error-message" class="error-message hidden"></div>
+
+            <!-- 株価情報セクション -->
+            <section id="stock-info" class="stock-info hidden">
+                <h2 id="stock-name">銘柄名</h2>
+                <div class="stock-header">
+                    <div class="price-container">
+                        <div class="current-price" id="current-price">¥0</div>
+                        <div class="price-change" id="price-change">
+                            <span id="change-amount">¥0</span>
+                            <span id="change-percent">(0.00%)</span>
+                        </div>
+                    </div>
+                    <div class="last-updated" id="last-updated">最終更新: --</div>
+                </div>
+
+                <div class="stock-details">
+                    <div class="detail-item">
+                        <span class="label">始値:</span>
+                        <span id="open-price">--</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">高値:</span>
+                        <span id="high-price">--</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">安値:</span>
+                        <span id="low-price">--</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">出来高:</span>
+                        <span id="volume">--</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">時価総額:</span>
+                        <span id="market-cap">--</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">PER:</span>
+                        <span id="pe-ratio">--</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">配当利回り:</span>
+                        <span id="dividend-yield">--</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">52週高値:</span>
+                        <span id="week-52-high">--</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">52週安値:</span>
+                        <span id="week-52-low">--</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ニュースセクション -->
+            <section id="news-section" class="news-section hidden">
+                <h2>📰 関連ニュース</h2>
+                <div id="news-container" class="news-container"></div>
+            </section>
+
+            <!-- 予測セクション -->
+            <section id="prediction-section" class="prediction-section hidden">
+                <h2>🔮 3ヶ月先の株価予測</h2>
+                <div class="prediction-container">
+                    <div class="prediction-header">
+                        <div class="prediction-price-container">
+                            <div class="prediction-label">予測価格</div>
+                            <div class="prediction-price" id="predicted-price">¥0</div>
+                            <div class="prediction-change" id="prediction-change">
+                                <span id="prediction-change-percent">0.00%</span>
+                            </div>
+                            <div class="prediction-date" id="prediction-date">予測日: --</div>
+                        </div>
+                    </div>
+
+                    <div class="confidence-interval">
+                        <h3>信頼区間 (95%)</h3>
+                        <div class="interval-range">
+                            <div class="interval-item">
+                                <span class="label">上限:</span>
+                                <span id="confidence-upper">--</span>
+                            </div>
+                            <div class="interval-item">
+                                <span class="label">下限:</span>
+                                <span id="confidence-lower">--</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="indicators">
+                        <h3>テクニカル指標</h3>
+                        <div class="indicator-grid">
+                            <div class="indicator-item">
+                                <span class="label">20日移動平均:</span>
+                                <span id="ma-20">--</span>
+                            </div>
+                            <div class="indicator-item">
+                                <span class="label">50日移動平均:</span>
+                                <span id="ma-50">--</span>
+                            </div>
+                            <div class="indicator-item">
+                                <span class="label">ボラティリティ:</span>
+                                <span id="volatility">--</span>
+                            </div>
+                            <div class="indicator-item">
+                                <span class="label">トレンド:</span>
+                                <span id="trend">--</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="analysis">
+                        <h3>分析結果</h3>
+                        <p id="analysis-text">--</p>
+                    </div>
+
+                    <div class="disclaimer">
+                        <p id="disclaimer-text">
+                            ⚠️ この予測は過去のデータに基づく統計的な推定であり、投資助言ではありません。
+                            実際の投資判断は自己責任で行ってください。
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2024 日本株価分析アプリ | データ提供: Yahoo! Finance</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
