@@ -21,6 +21,11 @@ def index():
     """メインページを表示"""
     return send_from_directory('static', 'index.html')
 
+@app.route('/favicon.ico')
+def favicon():
+    """favicon.icoのリクエストを処理（404エラー回避）"""
+    return '', 204
+
 @app.route('/api/stock/<ticker>')
 def get_stock_info(ticker):
     """株価情報を取得"""
