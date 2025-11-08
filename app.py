@@ -19,7 +19,7 @@ def format_ticker(ticker):
 @app.route('/')
 def index():
     """メインページを表示"""
-    return send_from_directory('static', 'index.html')
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/favicon.ico')
 def favicon():
